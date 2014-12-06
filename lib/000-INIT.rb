@@ -1,4 +1,3 @@
-wr 'successful'
 class Main
 	def initialize
 		
