@@ -1,5 +1,5 @@
 ===========================================================================
-Sat Dec 06 13:19:59 RTZ 2 (зима) 2014
+Sun Dec 07 12:13:57 RTZ 2 (зима) 2014
 ===========================================================================
 Log writer initialized successful
 loading LIB...
@@ -11,8 +11,30 @@ end
 	evaluating: 100-Game_Character_Base.rb
 class Game_Character_Base
 def initialize
-@x,@y,@direction=0,0,0
-@hp,@mp=1,1
+_positions
+_stats
+end
+def set_positions(hash)
+@direction=hash[:direction] if hash.include?(:direction)
+@head_direction=hash[:head_direction] if hash.include?(:head_direction)
+@map=hash[:map] if hash.include?(:map)
+@screen_x=hash[:screen_x] if hash.include?(:screen_x)
+@screen_y=hash[:screen_y] if hash.include?(:screen_y)
+@x=hash[:x] if hash.include?(:x)
+@y=hash[:y] if hash.include?(:y)
+end
+def set_stats(hash)
+end
+private
+def _positions
+@x,@y,@direction=0,0,:down
+@head_direction=:same
+@screen_x,@screen_y=0,0
+@map=1
+end
+def _stats
+@hp,@mp=30,5
+@pwr,@agi,@vit,@int,@soul,@def=10,10,10,10,10,0
 end
 end
 	evaluating: 101-Game_Keyword.rb
