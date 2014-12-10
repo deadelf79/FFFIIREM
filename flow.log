@@ -1,52 +1,134 @@
-===========================================================================
-Sun Dec 07 12:13:57 RTZ 2 (����) 2014
+﻿===========================================================================
+Sun Dec 07 17:40:33 RTZ 2 (����) 2014
 ===========================================================================
 Log writer initialized successful
-loading LIB...
-	evaluating: 000-INIT.rb
+фыва
+--class Main
 class Main
+--	def initialize
 def initialize
+--		
+--	end
 end
+--
 end
-	evaluating: 100-Game_Character_Base.rb
+--# Базовый класс персонажа.
+--# Содержит все характеристики всех персонажей, является родительским по отношению к:
+--# * Game_Player - класс главного героя, добавлет управление игроком
+--# * Game_Enemy - класс противника, добавляет:
+--#	* трофеи при поражении
+--#	* иммунитет к стихиям
+--# * Game_Character - класс обычного персонажа (NPC), добавляет:
+--#	* путь движения
+--#	* темы диалогов
+--#
+--class Game_Character_Base
 class Game_Character_Base
+--	# Создает экземпляр класса
+--	def initialize
 def initialize
+--		_positions
 _positions
+--		_stats
 _stats
+--	end
 end
+--	
+--	# Устанавливает позицию персонажа с помощью хэш-таблицы, которая может содержать такие параметры:
+--	# * :direction - направление тела персонажа, может принимать значения:
+--	#	0 или :up - вверх
+--	#	1 или :right - вправо
+--	#	2 или :down - вниз
+--	#	3 или :left - влево
+--	# * :direction - направление головы персонажа, может принимать значения:
+--	#	0 или :same - то же, что и направление тела, персонаж смотрит прямо перед собой
+--	#	1 или :right - персонаж смотрит вправо
+--	#	3 или :left - персонажи смотрит влево
+--	# * :x, :y - позиция персонажа на карте
+--	def set_positions(hash)
 def set_positions(hash)
+--		@direction=hash[:direction] if hash.include?(:direction)
 @direction=hash[:direction] if hash.include?(:direction)
+--		@head_direction=hash[:head_direction] if hash.include?(:head_direction)
 @head_direction=hash[:head_direction] if hash.include?(:head_direction)
+--		@map=hash[:map] if hash.include?(:map)
 @map=hash[:map] if hash.include?(:map)
+--		@screen_x=hash[:screen_x] if hash.include?(:screen_x)
 @screen_x=hash[:screen_x] if hash.include?(:screen_x)
+--		@screen_y=hash[:screen_y] if hash.include?(:screen_y)
 @screen_y=hash[:screen_y] if hash.include?(:screen_y)
+--		@x=hash[:x] if hash.include?(:x)
 @x=hash[:x] if hash.include?(:x)
+--		@y=hash[:y] if hash.include?(:y)
 @y=hash[:y] if hash.include?(:y)
+--	end
 end
+--	
+--	# Устанавливает все параметры персонажа. Применяется, в первую очередь,
+--	# при создании персонажа. Хэш-таблица может принимать такие значения:
+--	# 
+--	def set_stats(hash)
 def set_stats(hash)
+--	
+--	end
 end
+--	
+--	private
 private
+--	
+--	def _positions
 def _positions
+--		@x,@y,@direction=0,0,:down
 @x,@y,@direction=0,0,:down
+--		@head_direction=:same
 @head_direction=:same
+--		@screen_x,@screen_y=0,0
 @screen_x,@screen_y=0,0
+--		@map=1
 @map=1
+--	end
 end
+--	
+--	def _stats
 def _stats
+--		@hp,@mp=30,5
 @hp,@mp=30,5
+--		@pwr,@agi,@vit,@int,@soul,@def=10,10,10,10,10,0
 @pwr,@agi,@vit,@int,@soul,@def=10,10,10,10,10,0
+--	end
 end
+--
 end
-	evaluating: 101-Game_Keyword.rb
+--﻿# Класс ключевого слова.
 ﻿
+--# Содержит данные о самом слове/словосочетании, его описание и доступность.
+--# Подробнее об использовании смотри в классе Game_Vocab.
+--class Game_Keyword
 class Game_Keyword
+--	# Ключевое слово
+--	attr_reader :word
 attr_reader :word
+--	# Описание для меню "Словарь"
+--	attr_reader :description
 attr_reader :description
+--	# Доступность слова в данный момент игры
+--	attr_accessor :enable
 attr_accessor :enable
+--	
+--	# Создает экземпляр класса
+--	def initialize(word,description,enable)
 def initialize(word,description,enable)
+--		@word,@description,@enable=word,description,enable
 @word,@description,@enable=word,description,enable
+--	end
 end
+--	
+--	# Проверка доступности слова для диалога
+--	def enabled?
 def enabled?
+--		@enable
 @enable
+--	end
 end
+--
 end
